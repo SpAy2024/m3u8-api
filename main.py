@@ -11,8 +11,7 @@ async def extraer_m3u8(url_embed: str) -> str | None:
     headless=True,
     args=["--no-sandbox", "--disable-dev-shm-usage"]
 )
-
-        context = await browser.new_context()
+ context = await browser.new_context()
         page = await context.new_page()
 
         m3u8_urls = []
