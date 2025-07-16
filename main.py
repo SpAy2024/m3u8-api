@@ -8,10 +8,10 @@ app = FastAPI(title="M3U8 Extractor API", version="1.0")
 async def extraer_m3u8(url_embed: str) -> str | None:
     async with async_playwright() as p:
         browser = await p.chromium.launch(
-    headless=True,
-    args=["--no-sandbox", "--disable-dev-shm-usage"]
-)
- context = await browser.new_context()
+            headless=True,
+            args=["--no-sandbox", "--disable-dev-shm-usage"]
+        )
+        context = await browser.new_context()
         page = await context.new_page()
 
         m3u8_urls = []
@@ -44,3 +44,4 @@ async def extraer(url: str = Query(..., description="URL de video embebido")):
     if m3u8:
         return {"status": "success", "m3u8_url": m3u8}
     return JSONResponse(status_code=404, content={"status": "error", "message": "No se encontró la URL .m3u8"})
+
