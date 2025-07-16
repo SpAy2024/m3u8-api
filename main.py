@@ -36,9 +36,10 @@ async def extraer_m3u8(url_embed: str) -> str | None:
 
             await browser.close()
 
-            if m3u8_urls:
-                return m3u8_urls[0]
-            return None
+           if m3u8_urls:
+    base_url = m3u8_urls[0].split("?")[0]  # Elimina todo después del ?
+    return base_url
+    return None
     except Exception as e:
         print("❌ Error general:", e)
         return None
