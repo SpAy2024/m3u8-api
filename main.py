@@ -7,7 +7,11 @@ app = FastAPI(title="M3U8 Extractor API", version="1.0")
 
 async def extraer_m3u8(url_embed: str) -> str | None:
     async with async_playwright() as p:
-        browser = await p.chromium.launch(headless=True)
+        browser = await p.chromium.launch(
+    headless=True,
+    args=["--no-sandbox", "--disable-dev-shm-usage"]
+)
+
         context = await browser.new_context()
         page = await context.new_page()
 
